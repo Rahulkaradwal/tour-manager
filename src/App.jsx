@@ -1,6 +1,7 @@
 import AppLayout from '../ui/AppLayout';
 import Card from '../ui/Card';
 import CardContainer from '../ui/CardContainer';
+import Login from '../ui/Login';
 import './style.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -11,6 +12,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <CardContainer />,
+      },
+      {
+        path: '/login',
+        element: <Login />,
       },
       {
         path: '/tour',
