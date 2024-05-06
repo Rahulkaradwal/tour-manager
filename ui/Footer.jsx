@@ -1,8 +1,9 @@
+import logo from './../public/logo-green.png';
 function Footer() {
   return (
     <div className="footer">
       <div className="footer__logo">
-        <img src="img/logo-green.png" alt="Natours logo" />
+        <img src={logo} alt="Natours logo" />
       </div>
       <ul className="footer__nav">
         <li>
@@ -22,7 +23,7 @@ function Footer() {
         </li>
       </ul>
       <p className="footer__copyright">
-        &copy; by Jonas Schmedtmann. All rights reserved.
+        &copy; by Rahul Karadwal. All rights reserved.
       </p>
     </div>
   );

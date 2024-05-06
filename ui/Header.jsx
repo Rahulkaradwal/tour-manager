@@ -1,3 +1,5 @@
+import logo from './../public/logo-white.png';
+import user from './../public/default.jpg';
 function Header() {
   return (
     <header className="header">
@@ -19,15 +21,15 @@ function Header() {
         </form>
       </nav>
       <div className="header__logo">
-        <img src="img/logo-white.png" alt="Natours logo" />
+        <img src={logo} alt="Natours logo" />
       </div>
       <nav className="nav nav--user">
         <a href="#" className="nav__el">
           My bookings
         </a>
         <a href="#" className="nav__el">
-          <img src="img/user.jpg" alt="User photo" className="nav__user-img" />
-          <span>Jonas</span>
+          <img src={user} alt="User photo" className="nav__user-img" />
+          <span>Rahul Karadwal</span>
         </a>
       </nav>
     </header>
