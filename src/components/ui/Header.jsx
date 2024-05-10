@@ -1,5 +1,5 @@
-import logo from './../../../public/logo-white.png';
-import user from './../../../public/default.jpg';
+import logo from '/logo-white.png';
+import user from '/default.jpg';
 function Header() {
   return (
     <header className="header">
