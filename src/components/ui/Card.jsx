@@ -25,19 +25,19 @@ function Card(tour) {
         <p className="card__text">{tour.summary}</p>
         <div className="card__data">
           <svg className="card__icon">
-            <use href="img/icons.svg#icon-map-pin"></use>
+            <use href="/icons.svg#icon-map-pin"></use>
           </svg>
           <span>Aspen, USA</span>
         </div>
         <div className="card__data">
           <svg className="card__icon">
-            <use href="img/icons.svg#icon-calendar"></use>
+            <use href="/icons.svg#icon-calendar"></use>
           </svg>
           <span>January 2025</span>
         </div>
         <div className="card__data">
           <svg className="card__icon">
-            <use href="img/icons.svg#icon-flag"></use>
+            <use href="/icons.svg#icon-flag"></use>
           </svg>
           <span>
             {tour.locations.length}{' '}
@@ -46,7 +46,7 @@ function Card(tour) {
         </div>
         <div className="card__data">
           <svg className="card__icon">
-            <use href="img/icons.svg#icon-user"></use>
+            <use href="/icons.svg#icon-user"></use>
           </svg>
           <span>{tour.maxGroupSize} people</span>
         </div>
@@ -54,16 +54,18 @@ function Card(tour) {
 
       <div className="card__footer">
         <p>
-          <span className="card__footer-value">$ {tour.price}</span>
+          <span className="card__footer-value">$ {tour.price} </span>
           <span className="card__footer-text">per person</span>
         </p>
         <p className="card__ratings">
           <span className="card__footer-value">{tour.ratingAverage}</span>
           <span className="card__footer-text">
-            rating ({tour.ratingsQuantity})
+            Rating ({tour.ratingsQuantity})
           </span>
         </p>
-        <Link to={`/detail/${tour.id}`}>Details</Link>
+        <Link className="btn btn--green btn--small" to={`/detail/${tour.id}`}>
+          Details
+        </Link>
       </div>
     </div>
   );
