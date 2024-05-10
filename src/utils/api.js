@@ -13,3 +13,15 @@ export async function getTours() {
   }
   return json.data;
 }
+
+export async function getTour(id) {
+  const res = await fetch(`${url}/tours/${id}`);
+  if (!res.ok) {
+    throw Error('Could not find the tour');
+  }
+  const json = await res.json();
+  if (!json.data) {
+    throw Error('Response JSON is missing the data property');
+  }
+  return json.data;
+}

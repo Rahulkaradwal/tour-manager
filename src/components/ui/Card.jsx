@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 function Card(tour) {
   return (
     <div className="card">
@@ -61,9 +63,7 @@ function Card(tour) {
             rating ({tour.ratingsQuantity})
           </span>
         </p>
-        <a href="#" className="btn btn--green btn--small">
-          Details
-        </a>
+        <Link to={`/detail/${tour.id}`}>Details</Link>
       </div>
     </div>
   );

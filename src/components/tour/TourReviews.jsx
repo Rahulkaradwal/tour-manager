@@ -1,10 +1,12 @@
-import ReviewCard from '../ReviewCard';
+import ReviewCard from './ReviewCard';
 
-function TourReviews() {
+function TourReviews({ reviews }) {
   return (
     <section className="section-reviews">
       <div className="reviews">
-        <ReviewCard />
+        {reviews.map((review) => (
+          <ReviewCard key={review._id} review={review} />
+        ))}
       </div>
     </section>
   );

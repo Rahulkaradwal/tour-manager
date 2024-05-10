@@ -3,7 +3,7 @@ import Header from '../ui/Header';
 import { Outlet } from 'react-router-dom';
 function AppLayout() {
   return (
-    <div>
+    <div className="mainBody">
       <Header />
       <Outlet />
       <Footer />
