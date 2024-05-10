@@ -5,6 +5,7 @@ import { useLoaderData } from 'react-router-dom';
 function CardContainer() {
   const data = useLoaderData();
   const tours = data.doc;
+  console.log(tours);
 
   return (
     <div className="overview">
