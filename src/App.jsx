@@ -1,5 +1,4 @@
 import AppLayout from './components/Overview/AppLayout';
-import Card from './components/ui/Card';
 import CardContainer, {
   loader as tourLoader,
 } from './components/ui/CardContainer';
@@ -7,6 +6,7 @@ import Login from './components/auth/Login';
 import './style.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import TourDetails, { loader as getTour } from './components/tour/TourDetails';
+import SignUp, { action as signUpAction } from './components/auth/Singup';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +20,11 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />,
+      },
+      {
+        path: '/signup',
+        element: <SignUp />,
+        action: signUpAction,
       },
       {
         path: 'detail/:tourId',

@@ -25,3 +25,22 @@ export async function getTour(id) {
   }
   return json.data;
 }
+
+export async function createUser(data) {
+  const res = await fetch(`${url}/users/signup`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!res.ok) {
+    throw Error('Cound not create new User');
+  }
+
+  const resData = await res.json();
+  const token = resData.token;
+
+  localStorage.setItem('token', token);
+}
