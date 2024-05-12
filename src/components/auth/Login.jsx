@@ -88,8 +88,11 @@ export async function action({ request }) {
     }
 
     const result = await response.json();
-    // Store the received token for future requests
+
+    // Store the received data for future requests
     localStorage.setItem('token', result.token);
+    localStorage.setItem('name', result.data.user.name);
+    localStorage.setItem('email', result.data.user.email);
 
     return redirect('/');
   } catch (error) {
