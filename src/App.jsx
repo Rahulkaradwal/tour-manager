@@ -2,7 +2,7 @@ import AppLayout from './components/Overview/AppLayout';
 import CardContainer, {
   loader as tourLoader,
 } from './components/ui/CardContainer';
-import Login from './components/auth/Login';
+import Login, { action as loginAction } from './components/auth/Login';
 import './style.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import TourDetails, { loader as getTour } from './components/tour/TourDetails';
@@ -20,6 +20,7 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />,
+        action: loginAction,
       },
       {
         path: '/signup',
