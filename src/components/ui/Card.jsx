@@ -33,7 +33,12 @@ function Card(tour) {
           <svg className="card__icon">
             <use href="/icons.svg#icon-calendar"></use>
           </svg>
-          <span>January 2025</span>
+          <span>
+            {new Date(tour.startDates[0]).toLocaleString('en-us', {
+              month: 'long',
+              year: 'numeric',
+            })}
+          </span>
         </div>
         <div className="card__data">
           <svg className="card__icon">
