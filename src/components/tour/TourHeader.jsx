@@ -1,8 +1,16 @@
 function TourHeader({ tour }) {
-  const { name, duration } = tour;
+  const { name, duration, imageCover } = tour;
 
   return (
     <section className="section-header">
+      <div className="header__hero">
+        <div className="header__hero-overlay">&nbsp;</div>
+        <img
+          className="header__hero-img"
+          src={`/tours/${imageCover}`}
+          alt={`${name}`}
+        />
+      </div>
       <div className="heading-box">
         <h1 className="heading-primary">
           <span>{name}</span>
