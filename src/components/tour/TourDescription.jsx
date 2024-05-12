@@ -6,6 +6,7 @@ function TourDescription({ tour }) {
     guides,
     name,
     description,
+    startDates,
   } = tour;
 
   console.log(guides);
@@ -25,7 +26,13 @@ function TourDescription({ tour }) {
                 <use href="img/icons.svg#icon-calendar"></use>
               </svg>
               <span className="overview-box__label">Next date</span>
-              <span className="overview-box__text">August 2021</span>
+              <span className="overview-box__text">
+                {' '}
+                {new Date(startDates[0]).toLocaleString('en-us', {
+                  month: 'long',
+                  year: 'numeric',
+                })}
+              </span>
             </div>
             <div className="overview-box__detail">
               <svg className="overview-box__icon">

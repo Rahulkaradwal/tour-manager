@@ -11,21 +11,17 @@ function ReviewCard({ review }) {
       </div>
       <p className="reviews__text">{review.review}</p>
       <div className="reviews__rating">
-        <svg className="reviews__star reviews__star--active">
-          <use href="img/icons.svg#icon-star"></use>
-        </svg>
-        <svg className="reviews__star reviews__star--active">
-          <use href="img/icons.svg#icon-star"></use>
-        </svg>
-        <svg className="reviews__star reviews__star--active">
-          <use href="img/icons.svg#icon-star"></use>
-        </svg>
-        <svg className="reviews__star reviews__star--active">
-          <use href="img/icons.svg#icon-star"></use>
-        </svg>
-        <svg className="reviews__star reviews__star--active">
-          <use href="img/icons.svg#icon-star"></use>
-        </svg>
+        {[1, 2, 3, 4, 5].map((star) => (
+          <svg
+            key={star}
+            className={`reviews__star reviews__star--${
+              review.rating >= star ? 'active' : 'inactive'
+            }`}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <use xlinkHref="/icons.svg#icon-star" />
+          </svg>
+        ))}
       </div>
     </div>
   );
