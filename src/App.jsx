@@ -1,4 +1,6 @@
-import AppLayout from './components/Overview/AppLayout';
+import AppLayout, {
+  loader as AuthLoader,
+} from './components/Overview/AppLayout';
 import CardContainer, {
   loader as tourLoader,
 } from './components/ui/CardContainer';
@@ -7,10 +9,13 @@ import './style.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import TourDetails, { loader as getTour } from './components/tour/TourDetails';
 import SignUp, { action as signUpAction } from './components/auth/Singup';
+import { logOut } from './utils/getToken';
 
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
+
+    loader: AuthLoader,
     children: [
       {
         path: '/',
@@ -32,7 +37,7 @@ const router = createBrowserRouter([
         loader: getTour,
         element: <TourDetails />,
       },
-      {},
+      { path: '/logout', action: logOut },
     ],
   },
 ]);

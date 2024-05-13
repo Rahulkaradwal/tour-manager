@@ -1,5 +1,6 @@
 import logo from '/logo-white.png';
 import photo from '/default.jpg';
+import { Form } from 'react-router-dom';
 function Header() {
   const name = localStorage.getItem('name');
 
@@ -38,9 +39,15 @@ function Header() {
             />
             <span>{name.split(' ')[0]}</span>
           </a>
-          <a href="/" className="nav__el nav__el--logout">
-            Log out
-          </a>
+          <Form
+            action="/logout"
+            method="post"
+            className="nav__el nav__el--logout"
+          >
+            <button className="nav__el nav__el--logout" type="submit">
+              Log out
+            </button>
+          </Form>
         </nav>
       ) : (
         <nav className="nav nav--user">

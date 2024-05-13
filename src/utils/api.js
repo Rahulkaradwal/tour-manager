@@ -15,7 +15,14 @@ export async function getTours() {
 }
 
 export async function getTour(id) {
-  const res = await fetch(`${url}/tours/${id}`);
+  const token = localStorage.getItem('token');
+  const res = await fetch(`${url}/tours/${id}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
   if (!res.ok) {
     throw Error('Could not find the tour');
   }
