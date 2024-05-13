@@ -1,8 +1,8 @@
 import logo from '/logo-white.png';
 import photo from '/default.jpg';
-import { Form } from 'react-router-dom';
+import { Form, useLoaderData } from 'react-router-dom';
 function Header() {
-  const name = localStorage.getItem('name');
+  const data = useLoaderData('root');
 
   return (
     <header className="header">
@@ -26,7 +26,7 @@ function Header() {
       <div className="header__logo">
         <img src={logo} alt="Natours logo" />
       </div>
-      {name ? (
+      {data ? (
         <nav className="nav nav--user">
           <a href="#" className="nav__el">
             My bookings
@@ -34,10 +34,10 @@ function Header() {
           <a href="/me" className="nav__el">
             <img
               src={photo}
-              alt={`Photo of ${name}`}
+              alt={`Photo of ${data.name}`}
               className="nav__user-img"
             />
-            <span>{name.split(' ')[0]}</span>
+            <span>{data.name.split(' ')[0]}</span>
           </a>
           <Form
             action="/logout"
