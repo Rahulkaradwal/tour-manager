@@ -37,7 +37,7 @@ function Header() {
               alt={`Photo of ${data.name}`}
               className="nav__user-img"
             />
-            <span>{data.name.split(' ')[0]}</span>
+            <span>{data.name?.split(' ')[0]}</span>
           </a>
           <Form
             action="/logout"

@@ -30,6 +30,7 @@ export async function getTour(id) {
   if (!json.data) {
     throw Error('Response JSON is missing the data property');
   }
+
   return json.data;
 }
 

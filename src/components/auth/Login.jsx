@@ -94,6 +94,10 @@ export async function action({ request }) {
     localStorage.setItem('name', result.data.user.name);
     localStorage.setItem('email', result.data.user.email);
 
+    const expiration = new Date();
+    expiration.setHours(expiration.getHours() + 1);
+    localStorage.setItem('expiration', expiration.toISOString());
+
     return redirect('/');
   } catch (error) {
     return json(
