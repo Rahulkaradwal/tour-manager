@@ -1,15 +1,17 @@
+// CardContainer.js
+import { useState } from 'react';
 import Card from './Card';
-import { getTours } from './../../utils/api';
+import Modal from './Modal';
 import { useLoaderData } from 'react-router-dom';
+import { getTours } from '../../utils/api';
 
 function CardContainer() {
   const data = useLoaderData();
-  const tours = data.doc;
 
   return (
     <div className="overview">
       <div className="card-container">
-        {tours.map((tour) => (
+        {data.tours.map((tour) => (
           <Card key={tour.id} {...tour} />
         ))}
       </div>
@@ -20,6 +22,10 @@ function CardContainer() {
 export default CardContainer;
 
 export async function loader() {
-  const tours = await getTours();
-  return tours;
+  try {
+    const tours = await getTours();
+    return { tours };
+  } catch (error) {
+    return { error }; // Return an empty array in case of error or handle accordingly
+  }
 }

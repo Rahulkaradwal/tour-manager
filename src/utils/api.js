@@ -11,7 +11,7 @@ export async function getTours() {
   if (!json.data) {
     throw Error('Response JSON is missing the data property');
   }
-  return json.data;
+  return json.data.doc;
 }
 
 export async function getTour(id) {

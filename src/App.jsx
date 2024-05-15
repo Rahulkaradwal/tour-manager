@@ -33,13 +33,13 @@ const router = createBrowserRouter([
       },
       {
         path: 'detail/:tourId',
-        loader: async (args) => {
-          console.log(args);
-          const authResult = await checkAuthLoader(args);
-          if (authResult) return authResult;
+        // loader: async (args) => {
+        //   const authResult = await checkAuthLoader(args);
+        //   if (authResult) return authResult;
 
-          return getTour(args);
-        },
+        //   return getTour(args);
+        // },
+        loader: getTour,
         element: <TourDetails />,
       },
       { path: '/logout', action: logOut },
