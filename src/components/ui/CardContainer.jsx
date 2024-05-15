@@ -1,7 +1,5 @@
 // CardContainer.js
-import { useState } from 'react';
 import Card from './Card';
-import Modal from './Modal';
 import { useLoaderData } from 'react-router-dom';
 import { getTours } from '../../utils/api';
 
