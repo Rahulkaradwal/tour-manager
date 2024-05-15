@@ -7,7 +7,7 @@ import './style.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import TourDetails, { loader as getTour } from './components/tour/TourDetails';
 import SignUp, { action as signUpAction } from './components/auth/Singup';
-import { logOut, tokenLoader } from './utils/getToken';
+import { logOut, checkAuthLoader, tokenLoader } from './utils/getToken';
 
 const router = createBrowserRouter([
   {
@@ -33,7 +33,13 @@ const router = createBrowserRouter([
       },
       {
         path: 'detail/:tourId',
-        loader: getTour,
+        loader: async (args) => {
+          console.log(args);
+          const authResult = await checkAuthLoader(args);
+          if (authResult) return authResult;
+
+          return getTour(args);
+        },
         element: <TourDetails />,
       },
       { path: '/logout', action: logOut },

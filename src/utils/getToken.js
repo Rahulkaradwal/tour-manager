@@ -20,3 +20,11 @@ export function logOut() {
 export function tokenLoader() {
   return getToken();
 }
+
+export function checkAuthLoader() {
+  const token = getToken();
+  if (!token) {
+    return redirect('/login');
+  }
+  return null;
+}

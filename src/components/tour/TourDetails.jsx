@@ -21,6 +21,7 @@ function TourDetails() {
 }
 
 export function loader({ params }) {
+  console.log(params.tourId);
   const tour = getTour(params.tourId);
 
   return tour;
