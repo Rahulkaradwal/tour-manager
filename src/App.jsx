@@ -27,7 +27,6 @@ const router = createBrowserRouter([
         path: '/login',
         element: <Login />,
         action: loginAction,
-        loader: tokenLoader,
       },
       {
         path: '/signup',

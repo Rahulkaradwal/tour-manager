@@ -3,6 +3,7 @@ import Footer from '../ui/Footer';
 import Header from '../ui/Header';
 import { Outlet, useLoaderData, useSubmit } from 'react-router-dom';
 import { getTokenDuration } from '../../utils/getToken';
+import { getTours } from '../../utils/api';
 function AppLayout() {
   const token = useLoaderData();
   const submit = useSubmit();
@@ -31,3 +32,12 @@ function AppLayout() {
 }
 
 export default AppLayout;
+
+export async function loader() {
+  try {
+    const tours = await getTours();
+    return { tours };
+  } catch (error) {
+    return { error }; // Return an empty array in case of error or handle accordingly
+  }
+}

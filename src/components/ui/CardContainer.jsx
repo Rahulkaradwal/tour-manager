@@ -7,6 +7,7 @@ import Loader from './Loader';
 function CardContainer() {
   const data = useLoaderData();
   const navigate = useNavigation();
+  console.log(data.tours);
 
   return (
     <div className="overview">
