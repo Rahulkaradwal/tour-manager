@@ -8,11 +8,13 @@ function CardContainer() {
 
   return (
     <div className="overview">
+      (
       <div className="card-container">
         {data.tours.map((tour) => (
           <Card key={tour.id} {...tour} />
         ))}
       </div>
+      )
     </div>
   );
 }

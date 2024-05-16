@@ -1,10 +1,10 @@
 const url = 'https://tour-manager-chi.vercel.app/api';
 
 export async function getTours() {
-  const res = await fetch(`${url}/tour`);
+  const res = await fetch(`${url}/tours`);
 
   if (!res.ok) {
-    throw Error(`Could not find the data: ${res.status} - ${res.statusText}`);
+    throw Error('No data Found, Please Try Again!');
   }
 
   const json = await res.json();
