@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigation } from 'react-router-dom';
 
 function Card(tour) {
+  const navigate = useNavigation();
   return (
     <div className="card">
       <div className="card__header">
@@ -69,7 +70,7 @@ function Card(tour) {
           </span>
         </p>
         <Link className="btn btn--green btn--small" to={`/detail/${tour.id}`}>
-          Details
+          {navigate.state === 'submitting' ? 'Loading' : 'Details'}
         </Link>
       </div>
     </div>

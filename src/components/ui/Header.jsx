@@ -1,15 +1,15 @@
 import logo from '/logo-white.png';
 import photo from '/default.jpg';
-import { Form, useLoaderData } from 'react-router-dom';
+import { Form, Link, useLoaderData } from 'react-router-dom';
 function Header() {
   const data = useLoaderData('root');
 
   return (
     <header className="header">
       <nav className="nav nav--tours">
-        <a href="#" className="nav__el">
+        <Link to="/" className="nav__el">
           All tours
-        </a>
+        </Link>
         <form className="nav__search">
           <button className="nav__search-btn">
             <svg>

@@ -1,51 +1,79 @@
-import { Form, json, redirect, useActionData } from 'react-router-dom';
+import {
+  Form,
+  json,
+  redirect,
+  useActionData,
+  useLoaderData,
+  useNavigate,
+  useNavigation,
+} from 'react-router-dom';
+import Loader from '../ui/Loader';
+import { useEffect } from 'react';
 
 function Login() {
+  const navigate = useNavigate();
+  const navigation = useNavigation();
   const actionData = useActionData();
+  const data = useLoaderData();
+
+  // Redirect if already logged in
+  if (data?.token) {
+    useEffect(() => {
+      navigate('/');
+    }, [navigate]);
+    return <Loader />; // Show loading state while redirecting
+  }
+
+  // Check if we are currently submitting the form
+  const isSubmitting = navigation.state === 'submitting';
 
   return (
     <main className="main">
-      <div className="login-form">
-        <h2 className="heading-secondary ma-bt-lg">Log into your account</h2>
-        <Form method="post" className="form form--login">
-          <div className="form__group">
-            <label htmlFor="email" className="form__label">
-              Email address
-            </label>
-            <input
-              name="email"
-              type="email"
-              id="email"
-              className="form__input"
-              placeholder="you@example.com"
-              required
-            />
-          </div>
-          <div className="form__group ma-bt-md">
-            <label htmlFor="password" className="form__label">
-              Password
-            </label>
-            <input
-              name="password"
-              type="password"
-              id="password"
-              className="form__input"
-              placeholder="••••••••"
-              required
-            />
-          </div>
-          {actionData?.error && (
+      {isSubmitting ? (
+        <Loader />
+      ) : (
+        <div className="login-form">
+          <h2 className="heading-secondary ma-bt-lg">Log into your account</h2>
+          <Form method="post" className="form form--login">
             <div className="form__group">
-              <p className="form__input-error">{actionData.error}</p>
+              <label htmlFor="email" className="form__label">
+                Email address
+              </label>
+              <input
+                name="email"
+                type="email"
+                id="email"
+                className="form__input"
+                placeholder="you@example.com"
+                required
+              />
             </div>
-          )}
-          <div className="form__group">
-            <button type="submit" className="btn btn--green">
-              Login
-            </button>
-          </div>
-        </Form>
-      </div>
+            <div className="form__group ma-bt-md">
+              <label htmlFor="password" className="form__label">
+                Password
+              </label>
+              <input
+                name="password"
+                type="password"
+                id="password"
+                className="form__input"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+            {actionData?.error && (
+              <div className="form__group">
+                <p className="form__input-error">{actionData.error}</p>
+              </div>
+            )}
+            <div className="form__group">
+              <button type="submit" className="btn btn--green">
+                Login
+              </button>
+            </div>
+          </Form>
+        </div>
+      )}
     </main>
   );
 }
@@ -98,7 +126,11 @@ export async function action({ request }) {
     expiration.setHours(expiration.getHours() + 1);
     localStorage.setItem('expiration', expiration.toISOString());
 
-    return redirect('/');
+    return redirect('/', {
+      headers: {
+        'Set-Cookie': `token=${result.token}; Path=/; HttpOnly; SameSite=Strict`,
+      },
+    });
   } catch (error) {
     return json(
       { error: 'Failed to login, please try again.' },
