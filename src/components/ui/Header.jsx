@@ -1,8 +1,11 @@
 import logo from '/logo-white.png';
 import photo from '/default.jpg';
-import { Form, Link, useLoaderData } from 'react-router-dom';
+import { Form, Link } from 'react-router-dom';
+import Search from './Search';
 function Header() {
-  const data = useLoaderData('root');
+  // const data = useLoaderData();
+
+  const name = localStorage.getItem('name');
 
   return (
     <header className="header">
@@ -10,23 +13,12 @@ function Header() {
         <Link to="/" className="nav__el">
           All tours
         </Link>
-        <form className="nav__search">
-          <button className="nav__search-btn">
-            <svg>
-              <use href="img/icons.svg#icon-search"></use>
-            </svg>
-          </button>
-          <input
-            type="text"
-            placeholder="Search tours"
-            className="nav__search-input"
-          />
-        </form>
+        {name && <Search />}
       </nav>
       <div className="header__logo">
         <img src={logo} alt="Natours logo" />
       </div>
-      {data ? (
+      {name ? (
         <nav className="nav nav--user">
           <a href="#" className="nav__el">
             My bookings
@@ -34,10 +26,10 @@ function Header() {
           <a href="/me" className="nav__el">
             <img
               src={photo}
-              alt={`Photo of ${data.name}`}
+              alt={`Photo of ${name}`}
               className="nav__user-img"
             />
-            <span>{data.name?.split(' ')[0]}</span>
+            <span>{name?.split(' ')[0]}</span>
           </a>
           <Form
             action="/logout"

@@ -19,9 +19,9 @@ function Login() {
   // Redirect if already logged in
   if (data?.token) {
     useEffect(() => {
-      navigate('/');
+      navigate('/tours');
     }, [navigate]);
-    return <Loader />; // Show loading state while redirecting
+    return <Loader />;
   }
 
   // Check if we are currently submitting the form
@@ -126,9 +126,12 @@ export async function action({ request }) {
     expiration.setHours(expiration.getHours() + 1);
     localStorage.setItem('expiration', expiration.toISOString());
 
+    const token = result.token;
+
+    // Return the necessary data and set the cookie header
     return redirect('/', {
       headers: {
-        'Set-Cookie': `token=${result.token}; Path=/; HttpOnly; SameSite=Strict`,
+        'Set-Cookie': `token=${token} ; Path=/; HttpOnly; SameSite=Strict`,
       },
     });
   } catch (error) {

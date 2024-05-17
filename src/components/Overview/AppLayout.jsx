@@ -1,26 +1,20 @@
 import { useEffect } from 'react';
-import Footer from '../ui/Footer';
-import Header from '../ui/Header';
-import { Outlet, useLoaderData, useSubmit } from 'react-router-dom';
-import { getTokenDuration } from '../../utils/getToken';
+import { useDispatch } from 'react-redux';
+import { Outlet, useLoaderData } from 'react-router-dom';
+import { loadTour } from '../../store/tourSlice';
 import { getTours } from '../../utils/api';
+import Header from './../ui/Header';
+import Footer from './../ui/Footer';
+
 function AppLayout() {
-  const token = useLoaderData();
-  const submit = useSubmit();
+  const data = useLoaderData();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!token) return;
-
-    if (token === 'Expired') {
-      return;
+    if (data && data.tours) {
+      dispatch(loadTour(data.tours));
     }
-
-    const tokenDuration = getTokenDuration();
-
-    setTimeout(() => {
-      submit(null, { action: '/logout', method: 'post' });
-    }, tokenDuration);
-  }, [token, submit]);
+  }, [dispatch, data]);
 
   return (
     <div className="mainBody">
@@ -38,6 +32,6 @@ export async function loader() {
     const tours = await getTours();
     return { tours };
   } catch (error) {
-    return { error }; // Return an empty array in case of error or handle accordingly
+    return { error };
   }
 }

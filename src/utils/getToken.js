@@ -18,6 +18,10 @@ export function getToken() {
 
 export function logOut() {
   localStorage.removeItem('token');
+  localStorage.removeItem('name');
+  localStorage.removeItem('email');
+  localStorage.removeItem('expiration');
+
   return redirect('/');
 }
 

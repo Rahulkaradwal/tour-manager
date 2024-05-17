@@ -1,13 +1,33 @@
 // CardContainer.js
 import Card from './Card';
-import { useLoaderData, useNavigation } from 'react-router-dom';
-import { getTours } from '../../utils/api';
+import { useLoaderData, useNavigation, useSubmit } from 'react-router-dom';
 import Loader from './Loader';
+import { useSelector } from 'react-redux';
+// import { loadTour } from '../../store/tourSlice';
+import { useEffect } from 'react';
+import { getTokenDuration } from '../../utils/getToken';
 
 function CardContainer() {
-  const data = useLoaderData();
   const navigate = useNavigation();
-  console.log(data.tours);
+
+  const { tours } = useSelector((state) => state.tour);
+
+  const token = useLoaderData();
+  const submit = useSubmit();
+
+  useEffect(() => {
+    if (!token) return;
+
+    if (token === 'Expired') {
+      return;
+    }
+
+    const tokenDuration = getTokenDuration();
+
+    setTimeout(() => {
+      submit(null, { action: '/logout', method: 'post' });
+    }, tokenDuration);
+  }, [token, submit]);
 
   return (
     <div className="overview">
@@ -15,7 +35,7 @@ function CardContainer() {
         <Loader />
       ) : (
         <div className="card-container">
-          {data.tours.map((tour) => (
+          {tours.map((tour) => (
             <Card key={tour.id} {...tour} />
           ))}
         </div>
@@ -25,12 +45,3 @@ function CardContainer() {
 }
 
 export default CardContainer;
-
-export async function loader() {
-  try {
-    const tours = await getTours();
-    return { tours };
-  } catch (error) {
-    return { error }; // Return an empty array in case of error or handle accordingly
-  }
-}

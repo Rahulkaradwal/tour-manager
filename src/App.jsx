@@ -1,7 +1,7 @@
-import AppLayout from './components/Overview/AppLayout';
-import CardContainer, {
+import AppLayout, {
   loader as tourLoader,
-} from './components/ui/CardContainer';
+} from './components/Overview/AppLayout';
+import CardContainer from './components/ui/CardContainer';
 import Login, { action as loginAction } from './components/auth/Login';
 import './style.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
@@ -13,13 +13,14 @@ import Error from './components/ui/Error';
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
-    loader: tokenLoader,
-    id: 'root',
+    loader: tourLoader,
+    id: 'parent',
 
     children: [
       {
         path: '/',
-        loader: tourLoader,
+        loader: tokenLoader,
+        id: 'root',
         element: <CardContainer />,
         errorElement: <Error />,
       },
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
         path: '/login',
         element: <Login />,
         action: loginAction,
+        loader: tokenLoader,
       },
       {
         path: '/signup',
