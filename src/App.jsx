@@ -18,6 +18,7 @@ const router = createBrowserRouter([
     element: <AppLayout />,
     loader: tourLoader,
     id: 'parent',
+    errorElement: <Error />,
 
     children: [
       {
@@ -25,7 +26,6 @@ const router = createBrowserRouter([
         loader: tokenLoader,
         id: 'root',
         element: <CardContainer />,
-        errorElement: <Error />,
       },
       {
         path: '/login',
@@ -49,7 +49,16 @@ const router = createBrowserRouter([
         element: <TourDetails />,
       },
       { path: '/logout', action: logOut },
-      { path: '/account', element: <UserAccount />, loader: userLoader },
+      {
+        path: '/account',
+        element: <UserAccount />,
+
+        loader: async (args) => {
+          const authResult = await checkAuthLoader(args);
+          if (authResult) return authResult;
+          return userLoader(args);
+        },
+      },
     ],
   },
 ]);
