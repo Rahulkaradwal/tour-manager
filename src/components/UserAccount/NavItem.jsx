@@ -10,3 +10,5 @@ function NavItem({ link, text, icon, active }) {
     </li>
   );
 }
+
+export default NavItem;

@@ -20,17 +20,17 @@ function Header() {
       </div>
       {name ? (
         <nav className="nav nav--user">
-          <a href="#" className="nav__el">
+          <Link to="#" className="nav__el">
             My bookings
-          </a>
-          <a href="/me" className="nav__el">
+          </Link>
+          <Link to="/account" className="nav__el">
             <img
               src={photo}
               alt={`Photo of ${name}`}
               className="nav__user-img"
             />
             <span>{name?.split(' ')[0]}</span>
-          </a>
+          </Link>
           <Form
             action="/logout"
             method="post"
@@ -43,12 +43,12 @@ function Header() {
         </nav>
       ) : (
         <nav className="nav nav--user">
-          <a href="/login" className="nav__el">
+          <Link to="/login" className="nav__el">
             Log in
-          </a>
-          <a href="/signup" className="nav__el nav__el--cta">
+          </Link>
+          <Link to="/signup" className="nav__el nav__el--cta">
             Sign up
-          </a>
+          </Link>
         </nav>
       )}
     </header>
