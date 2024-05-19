@@ -1,15 +1,16 @@
-import React from 'react';
+import { Form } from 'react-router-dom';
 
-function AccountSetting() {
-  const user = {
-    name: 'Rahul',
-    email: 'Karadwal@gmail.com',
-    role: 'admin',
-  };
+function AccountSetting({ user }) {
+  // const user = {
+  //   name: 'Rahul',
+  //   email: 'Karadwal@gmail.com',
+  //   role: 'admin',
+  // };
+  console.log(user);
   return (
     <div className="user-view__form-container">
       <h2 className="heading-secondary ma-bt-md">Your account settings</h2>
-      <form className="form form-user-data">
+      <Form method="post" className="form form-user-data">
         <div className="form__group">
           <label htmlFor="name" className="form__label">
             Name
@@ -54,7 +55,7 @@ function AccountSetting() {
         <div className="form__group right">
           <button className="btn btn--small btn--green">Save settings</button>
         </div>
-      </form>
+      </Form>
     </div>
   );
 }

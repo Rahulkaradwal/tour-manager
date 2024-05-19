@@ -1,5 +1,3 @@
-import React from 'react';
-
 function PasswordChange() {
   return (
     <div className="user-view__form-container">

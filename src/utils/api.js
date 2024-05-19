@@ -14,9 +14,9 @@ export async function getTours() {
   return json.data.doc;
 }
 
-export async function getTour(id) {
+export async function getData(id, data) {
   const token = localStorage.getItem('token');
-  const res = await fetch(`${url}/tours/${id}`, {
+  const res = await fetch(`${url}/${data}/${id}`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -51,4 +51,23 @@ export async function createUser(data) {
   const token = resData.token;
 
   localStorage.setItem('token', token);
+}
+
+export async function getMe() {
+  const token = localStorage.getItem('token');
+  const res = await fetch(`${url}/users/me`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+  if (!res.ok) {
+    throw Error('Could not find the User');
+  }
+  const json = await res.json();
+  if (!json.data) {
+    throw Error('Response JSON is missing the data property');
+  }
+
+  return json.data;
 }

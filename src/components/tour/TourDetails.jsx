@@ -3,7 +3,7 @@ import TourDescription from './TourDescription';
 import TourPictures from './TourPictures';
 import TourReviews from './TourReviews';
 import TourCta from './TourCta';
-import { getTour } from './../../utils/api';
+import { getData } from './../../utils/api';
 import { useLoaderData } from 'react-router-dom';
 
 function TourDetails() {
@@ -22,7 +22,7 @@ function TourDetails() {
 
 export function loader({ params }) {
   console.log(params.tourId);
-  const tour = getTour(params.tourId);
+  const tour = getData(params.tourId, 'tour');
 
   return tour;
 }

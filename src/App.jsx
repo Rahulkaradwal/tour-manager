@@ -9,7 +9,9 @@ import TourDetails, { loader as getTour } from './components/tour/TourDetails';
 import SignUp, { action as signUpAction } from './components/auth/Singup';
 import { logOut, checkAuthLoader, tokenLoader } from './utils/getToken';
 import Error from './components/ui/Error';
-import UserAccount from './components/UserAccount/UserAccount';
+import UserAccount, {
+  action as userLoader,
+} from './components/UserAccount/UserAccount';
 
 const router = createBrowserRouter([
   {
@@ -47,7 +49,7 @@ const router = createBrowserRouter([
         element: <TourDetails />,
       },
       { path: '/logout', action: logOut },
-      { path: '/account', element: <UserAccount /> },
+      { path: '/account', element: <UserAccount />, loader: userLoader },
     ],
   },
 ]);
