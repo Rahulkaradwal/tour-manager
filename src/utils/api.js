@@ -71,3 +71,24 @@ export async function getMe() {
 
   return json.data;
 }
+
+export async function saveSettings(data) {
+  const token = localStorage.getItem('token');
+  const res = await fetch(`${url}/users/updateMe`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) {
+    throw Error('Could not find the User');
+  }
+  const json = await res.json();
+  if (!json.data) {
+    throw Error('Response JSON is missing the data property');
+  }
+
+  return json;
+}

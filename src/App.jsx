@@ -13,6 +13,8 @@ import UserAccount, {
   action as userLoader,
 } from './components/UserAccount/UserAccount';
 
+import { action as saveSettingAction } from './components/UserAccount/AccountSetting';
+
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
@@ -58,6 +60,7 @@ const router = createBrowserRouter([
           if (authResult) return authResult;
           return userLoader(args);
         },
+        action: saveSettingAction,
       },
     ],
   },

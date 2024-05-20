@@ -8,7 +8,11 @@ function SignUp() {
     <main className="main">
       <div className="login-form">
         <h2 className="heading-secondary ma-bt-lg">Sign Up for Your Account</h2>
-        <Form method="post" className="form form--login">
+        <Form
+          method="post"
+          encType="multipart/form-data"
+          className="form form--login"
+        >
           <div className="form__group">
             <label htmlFor="name" className="form__label">
               Your Name
@@ -61,6 +65,17 @@ function SignUp() {
               required
             />
           </div>
+          {/* <div className="form__group ma-bt-md">
+            <label htmlFor="prifile_photo" className="form__label">
+              Profile Picture
+            </label>
+            <input
+              name="photo"
+              type="file"
+              id="photo"
+              className="form__input"
+            />
+          </div> */}
           {actionData?.error && (
             <div className="form__group">
               <p className="form__input-error">{actionData.error}</p>
