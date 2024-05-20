@@ -1,11 +1,18 @@
 import { Form, json } from 'react-router-dom';
+import { useActionData } from 'react-router-dom';
 import { saveSettings } from '../../utils/api';
 
 function AccountSetting({ user }) {
+  const actionData = useActionData();
+
   return (
     <div className="user-view__form-container">
       <h2 className="heading-secondary ma-bt-md">Your account settings</h2>
-      <Form method="post" className="form form-user-data">
+      <Form
+        method="post"
+        encType="multipart/form-data"
+        className="form form-user-data"
+      >
         <div className="form__group">
           <label htmlFor="name" className="form__label">
             Name
@@ -28,7 +35,6 @@ function AccountSetting({ user }) {
             className="form__input"
             type="email"
             defaultValue={user.email}
-            // defaultValue={newEmail}
             required
             name="email"
           />
@@ -39,7 +45,6 @@ function AccountSetting({ user }) {
             src={user.photo ? `/users/${user.photo}` : `/users/default.jpg`}
             alt="User Profile"
           />
-
           <input
             className="form__upload"
             type="file"
@@ -49,6 +54,11 @@ function AccountSetting({ user }) {
           />
           <label htmlFor="photo">Choose new photo</label>
         </div>
+        {actionData?.error && (
+          <div className="form__group">
+            <p className="form__input-error">{actionData.error}</p>
+          </div>
+        )}
         <div className="form__group right">
           <button type="submit" className="btn btn--small btn--green">
             Save settings
@@ -71,8 +81,7 @@ export async function action({ request }) {
   }
 
   const res = await saveSettings(data);
-  // const result = await res.json();
-  // console.log(result);
+
   console.log(res);
   return res;
 }
