@@ -1,9 +1,10 @@
 import logo from '/logo-white.png';
 import photo from '/default.jpg';
-import { Form, Link } from 'react-router-dom';
+import { Form, Link, useLocation } from 'react-router-dom';
 import Search from './Search';
 function Header() {
   const name = localStorage.getItem('name');
+  const location = useLocation();
 
   return (
     <header className="header">
@@ -11,7 +12,7 @@ function Header() {
         <Link to="/" className="nav__el">
           All tours
         </Link>
-        {name && <Search />}
+        {location.pathname === '/' && name && <Search />}
       </nav>
       <div className="header__logo">
         <img src={logo} alt="Natours logo" />
