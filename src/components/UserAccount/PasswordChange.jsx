@@ -1,8 +1,16 @@
+import { Form, useActionData, useNavigation } from 'react-router-dom';
+
 function PasswordChange() {
+  const actionData = useActionData();
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === 'submitting';
+
   return (
     <div className="user-view__form-container">
       <h2 className="heading-secondary ma-bt-md">Password change</h2>
-      <form className="form form-user-password">
+      <Form method="post" className="form form-user-password">
+        <input type="hidden" name="actionType" value="changePassword" />
+
         <div className="form__group">
           <label htmlFor="password-current" className="form__label">
             Current password
@@ -12,6 +20,7 @@ function PasswordChange() {
             className="form__input"
             type="password"
             placeholder="••••••••"
+            name="passwordConfirm"
             required
           />
         </div>
@@ -25,6 +34,7 @@ function PasswordChange() {
             type="password"
             placeholder="••••••••"
             required
+            name="password"
           />
         </div>
         <div className="form__group ma-bt-lg">
@@ -35,16 +45,22 @@ function PasswordChange() {
             id="password-confirm"
             className="form__input"
             type="password"
+            name="confirmPassword"
             placeholder="••••••••"
             required
           />
         </div>
+        {actionData?.error && (
+          <div className="form__group">
+            <p className="form__input-error">{actionData.error}</p>
+          </div>
+        )}
         <div className="form__group right">
           <button className="btn btn--small btn--green btn--save-password">
-            Save password
+            {isSubmitting ? 'Updating' : ' Save password'}
           </button>
         </div>
-      </form>
+      </Form>
     </div>
   );
 }

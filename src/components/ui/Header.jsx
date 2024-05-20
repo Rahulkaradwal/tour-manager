@@ -3,8 +3,6 @@ import photo from '/default.jpg';
 import { Form, Link } from 'react-router-dom';
 import Search from './Search';
 function Header() {
-  // const data = useLoaderData();
-
   const name = localStorage.getItem('name');
 
   return (

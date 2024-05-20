@@ -92,3 +92,23 @@ export async function saveSettings(data) {
 
   return json;
 }
+export async function changePassword(data) {
+  const token = localStorage.getItem('token');
+  const res = await fetch(`${url}/users/updateMyPassword`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) {
+    throw Error('Something Went Wrong');
+  }
+  const json = await res.json();
+  if (!json.data) {
+    throw Error('Response JSON is missing the data property');
+  }
+
+  return json;
+}

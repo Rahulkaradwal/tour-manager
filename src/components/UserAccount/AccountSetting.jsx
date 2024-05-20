@@ -1,9 +1,10 @@
-import { Form, json } from 'react-router-dom';
+import { Form, useNavigation } from 'react-router-dom';
 import { useActionData } from 'react-router-dom';
-import { saveSettings } from '../../utils/api';
 
 function AccountSetting({ user }) {
   const actionData = useActionData();
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === 'submitting';
 
   return (
     <div className="user-view__form-container">
@@ -13,6 +14,8 @@ function AccountSetting({ user }) {
         encType="multipart/form-data"
         className="form form-user-data"
       >
+        <input type="hidden" name="actionType" value="saveSettings" />
+
         <div className="form__group">
           <label htmlFor="name" className="form__label">
             Name
@@ -61,7 +64,7 @@ function AccountSetting({ user }) {
         )}
         <div className="form__group right">
           <button type="submit" className="btn btn--small btn--green">
-            Save settings
+            {isSubmitting ? 'Saving..' : 'Save settings'}
           </button>
         </div>
       </Form>
@@ -70,18 +73,3 @@ function AccountSetting({ user }) {
 }
 
 export default AccountSetting;
-
-export async function action({ request }) {
-  const formData = await request.formData();
-
-  const data = Object.fromEntries(formData);
-  // Validate the input
-  if (!data.email || !data.name) {
-    return json({ error: 'All fields are required.' }, { status: 400 });
-  }
-
-  const res = await saveSettings(data);
-
-  console.log(res);
-  return res;
-}

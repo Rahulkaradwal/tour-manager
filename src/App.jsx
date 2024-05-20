@@ -12,8 +12,7 @@ import Error from './components/ui/Error';
 import UserAccount, {
   action as userLoader,
 } from './components/UserAccount/UserAccount';
-
-import { action as saveSettingAction } from './components/UserAccount/AccountSetting';
+import { dispatcherAction } from './components/UserAccount/userAccountAction';
 
 const router = createBrowserRouter([
   {
@@ -33,15 +32,21 @@ const router = createBrowserRouter([
         path: '/login',
         element: <Login />,
         action: loginAction,
+        errorElement: <Error />,
+
         loader: tokenLoader,
       },
       {
         path: '/signup',
         element: <SignUp />,
+        errorElement: <Error />,
+
         action: signUpAction,
       },
       {
         path: 'detail/:tourId',
+        errorElement: <Error />,
+
         loader: async (args) => {
           const authResult = await checkAuthLoader(args);
           if (authResult) return authResult;
@@ -53,14 +58,16 @@ const router = createBrowserRouter([
       { path: '/logout', action: logOut },
       {
         path: '/account',
+        errorElement: <Error />,
+
         element: <UserAccount />,
+        action: dispatcherAction,
 
         loader: async (args) => {
           const authResult = await checkAuthLoader(args);
           if (authResult) return authResult;
           return userLoader(args);
         },
-        action: saveSettingAction,
       },
     ],
   },
