@@ -27,19 +27,19 @@ export async function saveSettingsAction(formData) {
 export async function changePasswordAction(formData) {
   const data = Object.fromEntries(formData);
 
-  if (!data.passwordConfirm || !data.password || !data.confirmPassword)
+  if (!data.currentPassword || !data.password || !data.passwordConfirm)
     return json(
       { error: 'All fields are required and passwords must match.' },
       { status: 400 }
     );
 
-  if (data.password !== data.confirmPassword)
+  if (data.password !== data.passwordConfirm)
     return json(
       { error: 'Password and Confirm Password must be same' },
       { status: 400 }
     );
 
-  const res = await changePassword(data.password);
+  const res = await changePassword({ passwordConfirm: data.passwordConfirm });
   //   return res;
   return res;
   // return redirect('/account');

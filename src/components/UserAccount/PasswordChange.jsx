@@ -20,7 +20,7 @@ function PasswordChange() {
             className="form__input"
             type="password"
             placeholder="••••••••"
-            name="passwordConfirm"
+            name="currentPassword"
             required
           />
         </div>
@@ -45,7 +45,7 @@ function PasswordChange() {
             id="password-confirm"
             className="form__input"
             type="password"
-            name="confirmPassword"
+            name="passwordConfirm"
             placeholder="••••••••"
             required
           />

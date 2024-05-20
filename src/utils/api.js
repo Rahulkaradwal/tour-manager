@@ -93,6 +93,7 @@ export async function saveSettings(data) {
   return json;
 }
 export async function changePassword(data) {
+  console.log(data);
   const token = localStorage.getItem('token');
   const res = await fetch(`${url}/users/updateMyPassword`, {
     method: 'POST',
