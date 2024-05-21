@@ -1,6 +1,6 @@
 // actions.js
 
-import { json, redirect } from 'react-router-dom';
+import { json } from 'react-router-dom';
 import { saveSettings, changePassword } from '../../utils/api';
 
 // Action for saving settings
@@ -10,15 +10,15 @@ export async function saveSettingsAction(formData) {
   if (!data.email || !data.name) {
     return json({ error: 'All fields are required.' }, { status: 400 });
   }
-  const filterData = {
-    name: data.name,
-    email: data.email,
-  };
 
-  const res = await saveSettings(filterData);
+  const finalData = new FormData();
+  for (const key in data) {
+    finalData.append(key, data[key]);
+  }
+
+  const res = await saveSettings(finalData);
 
   const name = res.data.user.name;
-
   localStorage.setItem('name', name);
   return res;
 }

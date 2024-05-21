@@ -1,4 +1,5 @@
-const url = 'https://tour-manager-chi.vercel.app/api';
+// const url = 'https://tour-manager-chi.vercel.app/api';
+const url = 'http://localhost:3000/api';
 
 export async function getTours() {
   const res = await fetch(`${url}/tours`);
@@ -74,14 +75,16 @@ export async function getMe() {
 
 export async function saveSettings(data) {
   const token = localStorage.getItem('token');
+
   const res = await fetch(`${url}/users/updateMe`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
+      // 'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data),
+    body: data,
   });
+
   if (!res.ok) {
     throw Error('Could not find the User');
   }
@@ -89,6 +92,7 @@ export async function saveSettings(data) {
   if (!json.data) {
     throw Error('Response JSON is missing the data property');
   }
+  console.log(json);
 
   return json;
 }
