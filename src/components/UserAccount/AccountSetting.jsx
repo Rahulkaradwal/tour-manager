@@ -1,10 +1,13 @@
 import { Form, useNavigation } from 'react-router-dom';
 import { useActionData } from 'react-router-dom';
+// import { url } from '../../utils/api';
 
 function AccountSetting({ user }) {
   const actionData = useActionData();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
+  // const url = 'http://localhost:3000';
+  const url = 'https://tour-manager-chi.vercel.app';
 
   return (
     <div className="user-view__form-container">
@@ -45,7 +48,12 @@ function AccountSetting({ user }) {
         <div className="form__group form__photo-upload">
           <img
             className="form__user-photo"
-            src={user.photo ? `/users/${user.photo}` : `/users/default.jpg`}
+            crossOrigin="anonymous"
+            src={
+              user.photo
+                ? `${url}/img/users/${user.photo}`
+                : `/users/default.jpg`
+            }
             alt="User Profile"
           />
           <input

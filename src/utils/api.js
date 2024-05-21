@@ -1,5 +1,5 @@
-// const url = 'https://tour-manager-chi.vercel.app/api';
-const url = 'http://localhost:3000/api';
+export const url = 'https://tour-manager-chi.vercel.app/api';
+// export const url = 'http://localhost:3000/api';
 
 export async function getTours() {
   const res = await fetch(`${url}/tours`);
