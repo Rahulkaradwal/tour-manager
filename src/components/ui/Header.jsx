@@ -4,6 +4,7 @@ import { Form, Link, useLocation } from 'react-router-dom';
 import Search from './Search';
 function Header() {
   const name = localStorage.getItem('name');
+  const image = localStorage.getItem('photo');
   const location = useLocation();
 
   return (
@@ -24,7 +25,7 @@ function Header() {
           </Link>
           <Link to="/account" className="nav__el">
             <img
-              src={photo}
+              src={image ? image : photo}
               alt={`Photo of ${name}`}
               className="nav__user-img"
             />

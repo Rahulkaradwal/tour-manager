@@ -69,7 +69,6 @@ export async function getMe() {
   if (!json.data) {
     throw Error('Response JSON is missing the data property');
   }
-
   return json.data;
 }
 

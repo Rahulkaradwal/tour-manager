@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom';
 import Loader from '../ui/Loader';
 import { useEffect } from 'react';
+import { url } from '../../utils/api';
 
 function Login() {
   const navigate = useNavigate();
@@ -90,14 +91,11 @@ export async function action({ request }) {
   }
 
   try {
-    const response = await fetch(
-      'https://tour-manager-chi.vercel.app/api/users/login',
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      }
-    );
+    const response = await fetch(`${url}/users/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
 
     if (!response.ok) {
       // Handle non-JSON response gracefully
@@ -121,6 +119,7 @@ export async function action({ request }) {
     localStorage.setItem('token', result.token);
     localStorage.setItem('name', result.data.user.name);
     localStorage.setItem('email', result.data.user.email);
+    localStorage.setItem('photo', result.data.user.photo);
 
     const expiration = new Date();
     expiration.setHours(expiration.getHours() + 1);

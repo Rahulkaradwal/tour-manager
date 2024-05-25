@@ -6,9 +6,9 @@ function AccountSetting({ user }) {
   const actionData = useActionData();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
-  // const url = 'http://localhost:3000';
-  const url = 'https://tour-manager-chi.vercel.app';
 
+  // const url = 'http://localhost:3000';
+  // const url = 'https://tour-manager-chi.vercel.app';
   return (
     <div className="user-view__form-container">
       <h2 className="heading-secondary ma-bt-md">Your account settings</h2>
@@ -48,12 +48,8 @@ function AccountSetting({ user }) {
         <div className="form__group form__photo-upload">
           <img
             className="form__user-photo"
-            crossOrigin="anonymous"
-            src={
-              user.photo
-                ? `${url}/img/users/${user.photo}`
-                : `/users/default.jpg`
-            }
+            // crossOrigin="anonymous"
+            src={user.photo ? `${user.photo}` : `/users/default.jpg`}
             alt="User Profile"
           />
           <input
