@@ -22,7 +22,7 @@ function TourDetails() {
 
 export function loader({ params }) {
   console.log(params.tourId);
-  const tour = getData(params.tourId, 'tour');
+  const tour = getData(params.tourId, 'tours');
 
   return tour;
 }

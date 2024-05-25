@@ -1,5 +1,5 @@
-export const url = 'https://tour-manager-chi.vercel.app/api';
-// export const url = 'http://localhost:3000/api';
+// export const url = 'https://tour-manager-chi.vercel.app/api';
+export const url = 'http://localhost:3000/api';
 
 export async function getTours() {
   const res = await fetch(`${url}/tours`);
@@ -75,25 +75,29 @@ export async function getMe() {
 export async function saveSettings(data) {
   const token = localStorage.getItem('token');
 
-  const res = await fetch(`${url}/users/updateMe`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      // 'Content-Type': 'application/json',
-    },
-    body: data,
-  });
-
-  if (!res.ok) {
-    throw Error('Could not find the User');
+  try {
+    const res = await fetch(`${url}/users/updateMe`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        // 'Content-Type': 'application/json',
+      },
+      body: data,
+    });
+    const json = await res.json();
+    if (!json.data) {
+      throw Error('Response JSON is missing the data property');
+    }
+    return json;
+  } catch (err) {
+    console.log(err);
   }
-  const json = await res.json();
-  if (!json.data) {
-    throw Error('Response JSON is missing the data property');
-  }
-  console.log(json);
 
-  return json;
+  // if (!res.ok) {
+  //   throw Error('Could not find the User');
+  // }
+
+  // console.log(json);
 }
 export async function changePassword(data) {
   console.log(data);

@@ -1,4 +1,5 @@
 import { useActionData, Form, redirect, json } from 'react-router-dom';
+import { url } from '../../utils/api';
 
 function SignUp() {
   // Fetch action data to show error messages or other responses
@@ -65,17 +66,18 @@ function SignUp() {
               required
             />
           </div>
-          {/* <div className="form__group ma-bt-md">
-            <label htmlFor="prifile_photo" className="form__label">
-              Profile Picture
-            </label>
+
+          <div className="form__group form__photo-upload">
             <input
-              name="photo"
+              className="form__upload"
               type="file"
+              accept="image/*"
               id="photo"
-              className="form__input"
+              name="photo"
             />
-          </div> */}
+            <label htmlFor="photo">Choose Profile Picture</label>
+          </div>
+
           {actionData?.error && (
             <div className="form__group">
               <p className="form__input-error">{actionData.error}</p>
@@ -110,16 +112,22 @@ export async function action({ request }) {
       { status: 400 }
     );
   }
+  const finalData = new FormData();
+  finalData.append('name', data.name);
+  finalData.append('email', data.email);
+  finalData.append('password', data.password);
+  finalData.append('confirmPassword', data.confirmPassword);
+  if (formData.get('photo')) {
+    finalData.append('photo', formData.get('photo'));
+  }
 
   try {
-    const response = await fetch(
-      'https://tour-manager-chi.vercel.app/api/users/signup',
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      }
-    );
+    const response = await fetch(`${url}/users/signup`, {
+      method: 'POST',
+      // headers: { 'Content-Type': 'application/json' },
+      // body: JSON.stringify(data),
+      body: finalData,
+    });
 
     if (!response.ok) {
       const errorResult = await response.json();
