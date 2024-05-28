@@ -60,16 +60,12 @@ function CartProduct(tour) {
 
       <div className="cart-card__footer">
         <p>
-          <span>Total Price: </span>
+          <span> Price: </span>
 
           <span className="cart-card__footer-value">$ {tour.price} </span>
         </p>
         <div className="cart-card_footer-buttons">
-          <button className="btn cart_button ">-</button>
-          <Link className=" cart_link cart_button " to={`/detail/${tour.id}`}>
-            {navigate.state === 'submitting' ? 'Loading' : 'Buy'}
-          </Link>
-          <button className="btn  cart_button">+</button>
+          <button className="btn cart_button ">Delete</button>
         </div>
       </div>
     </div>

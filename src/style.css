@@ -1111,16 +1111,9 @@ html {
 
 /* Cart starts ----------------------------------------------- */
 .cart-card-container {
-  /* max-width: 120rem; */
-  /* margin: 0 auto; */
   margin-top: 3rem;
-  background-color: gainsboro;
-  /* display: grid; */
-  height: 58vh;
+  height: 59vh;
   overflow-y: scroll;
-  display: flex;
-  /* grid-template-columns: repeat(3, 1fr); */
-  /* grid-gap: 7rem; */
 }
 
 .cart-heading-tertirary {
@@ -1134,9 +1127,9 @@ html {
 }
 
 .cart-card {
-  margin: 2rem;
-  height: 25vh;
-  width: 100%;
+  margin: 1rem;
+  height: 23vh;
+  width: 98%;
   border-radius: 5px;
   overflow: hidden;
   -webkit-box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1);
@@ -1191,7 +1184,7 @@ html {
   grid-template-columns: 1fr 1fr;
   grid-row-gap: 1.75rem;
   grid-column-gap: 2rem;
-  padding: 2.5rem 3rem;
+  padding: 2rem 3rem;
 }
 .cart-card__sub-heading {
   font-size: 1.2rem;
@@ -1243,10 +1236,12 @@ html {
   font-size: large;
 }
 .cart_button {
-  background-color: #55c57a4e;
+  background-color: gainsboro;
+  color: black;
+  text-transform: capitalize;
 
   border-radius: 4px;
-  padding: 1rem 2.5rem;
+  padding: 1rem 2rem;
   margin: 1rem;
   /* border: 1px solid #55c57a; */
 }
