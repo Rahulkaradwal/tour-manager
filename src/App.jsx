@@ -13,6 +13,7 @@ import UserAccount, {
   action as userLoader,
 } from './components/UserAccount/UserAccount';
 import { dispatcherAction } from './components/UserAccount/userAccountAction';
+import CartMain from './components/cart/CartMain';
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,7 @@ const router = createBrowserRouter([
         },
         element: <TourDetails />,
       },
+      { path: '/cart', element: <CartMain /> },
       { path: '/logout', action: logOut },
       {
         path: '/account',

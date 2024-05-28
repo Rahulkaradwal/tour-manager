@@ -12,6 +12,7 @@ export async function getTours() {
   if (!json.data) {
     throw Error('Response JSON is missing the data property');
   }
+  console.log(json.data.doc);
   return json.data.doc;
 }
 
@@ -31,7 +32,6 @@ export async function getData(id, data) {
   if (!json.data) {
     throw Error('Response JSON is missing the data property');
   }
-
   return json.data;
 }
 
