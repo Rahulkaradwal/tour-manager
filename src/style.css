@@ -1224,7 +1224,6 @@ html {
   fill: #55c57a;
 }
 .cart-card__footer {
-  background-color: #f7f7f7;
   padding: 4rem 8rem;
   border-top: 1px solid #f1f1f1;
   font-size: 1.4rem;
@@ -1244,10 +1243,12 @@ html {
   font-size: large;
 }
 .cart_button {
+  background-color: #55c57a4e;
+
   border-radius: 4px;
   padding: 1rem 2.5rem;
   margin: 1rem;
-  border: 1px solid #55c57a;
+  /* border: 1px solid #55c57a; */
 }
 .cart-card__footer-value {
   font-weight: 700;
