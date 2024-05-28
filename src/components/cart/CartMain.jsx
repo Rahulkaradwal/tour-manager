@@ -3,6 +3,7 @@ function CartMain() {
   return (
     <div>
       <CartItems />
+      {/* <Loader /> */}
     </div>
   );
 }

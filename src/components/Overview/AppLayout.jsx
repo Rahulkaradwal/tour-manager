@@ -1,14 +1,17 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Outlet, useLoaderData } from 'react-router-dom';
+import { Outlet, useLoaderData, useNavigation } from 'react-router-dom';
 import { loadTour } from '../../store/tourSlice';
 import { getTours } from '../../utils/api';
 import Header from './../ui/Header';
 import Footer from './../ui/Footer';
+import Loader from '../ui/Loader';
 
 function AppLayout() {
+  const navigation = useNavigation();
   const data = useLoaderData();
   const dispatch = useDispatch();
+  const isLoading = navigation.state === 'loading';
 
   useEffect(() => {
     if (data && data.tours) {
@@ -19,7 +22,7 @@ function AppLayout() {
   return (
     <div className="mainBody">
       <Header />
-      <Outlet />
+      {isLoading ? <Loader /> : <Outlet />}
       <Footer />
     </div>
   );
