@@ -69,6 +69,7 @@ function Card(tour) {
             Rating ({tour.ratingsQuantity})
           </span>
         </p>
+
         <Link className="btn btn--green btn--small" to={`/detail/${tour.id}`}>
           {navigate.state === 'submitting' ? 'Loading' : 'Details'}
         </Link>

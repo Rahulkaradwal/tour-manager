@@ -15,7 +15,7 @@ function TourDetails() {
       <TourDescription tour={tour} />
       <TourPictures images={tour.images} />
       <TourReviews reviews={tour.reviews} />
-      <TourCta />
+      <TourCta tour={tour} />
     </>
   );
 }

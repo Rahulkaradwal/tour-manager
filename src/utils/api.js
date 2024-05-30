@@ -1,5 +1,5 @@
-export const url = 'https://tour-manager-chi.vercel.app/api';
-// export const url = 'http://localhost:3000/api';
+// export const url = 'https://tour-manager-chi.vercel.app/api';
+export const url = 'http://localhost:3000/api';
 
 export async function getTours() {
   const res = await fetch(`${url}/tours`);
@@ -119,4 +119,30 @@ export async function changePassword(data) {
   }
 
   return json;
+}
+
+export async function payment(id, stripe) {
+  const token = localStorage.getItem('token');
+  const response = await fetch(`${url}/booking/checkout-session/${id}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error('Could not find the tour');
+  }
+
+  const data = await response.json();
+  const sessionId = data.session.id;
+
+  const result = await stripe.redirectToCheckout({
+    sessionId: sessionId,
+  });
+
+  if (result.error) {
+    console.error('Error redirecting to checkout:', result.error.message);
+  }
 }

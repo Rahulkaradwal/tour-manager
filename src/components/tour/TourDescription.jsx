@@ -9,8 +9,6 @@ function TourDescription({ tour }) {
     startDates,
   } = tour;
 
-  console.log(guides);
-
   let leadGuide = guides.filter((val) => val.role === 'lead-guide');
   let tourGuide = guides.filter((val) => val.role === 'guide');
   let interGuide = guides.filter((val) => val.role === 'intern');
