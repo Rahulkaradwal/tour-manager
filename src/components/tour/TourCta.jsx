@@ -1,16 +1,23 @@
 import { loadStripe } from '@stripe/stripe-js';
 import { payment } from '../../utils/api';
-import { useNavigation } from 'react-router-dom';
+import { useState } from 'react';
 
 function TourCta({ tour }) {
-  const navigate = useNavigation();
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const makePayment = async () => {
+    setIsProcessing(true);
     const stripe = await loadStripe(
       'pk_test_51PKq5AACtXlX27RCTta5Syz5IKT86zQAJ9tvxDR23JtoAYkWMyh9s3y1Wp2mknNEgovJz0caZT8UgfocKu57UVNI00Cd44xUro'
     );
 
-    payment(tour.id, stripe);
+    try {
+      await payment(tour.id, stripe);
+    } catch (error) {
+      console.error('Payment error:', error);
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   return (
@@ -30,8 +37,9 @@ function TourCta({ tour }) {
           <button
             onClick={makePayment}
             className="btn btn--green span-all-rows"
+            disabled={isProcessing}
           >
-            {navigate.state === 'submitting' ? 'Processing' : ' Book tour now!'}
+            {isProcessing ? 'Processing...' : 'Book tour now!'}
           </button>
         </div>
       </div>
