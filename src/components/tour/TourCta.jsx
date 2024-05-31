@@ -12,6 +12,7 @@ function TourCta({ tour }) {
     );
 
     try {
+      console.log(tour.id);
       await payment(tour.id, stripe);
     } catch (error) {
       console.error('Payment error:', error);
@@ -24,10 +25,18 @@ function TourCta({ tour }) {
     <section className="section-cta">
       <div className="cta">
         <div className="cta__img cta__img--logo">
-          <img src="img/logo-white.png" alt="Natours logo" className="" />
+          <img src="/logo-white.png" alt="Natours logo" className="" />
         </div>
-        <img src="img/tour-5-2.jpg" alt="" className="cta__img cta__img--1" />
-        <img src="img/tour-5-1.jpg" alt="" className="cta__img cta__img--2" />
+        <img
+          src="/tours/tour-5-2.jpg"
+          alt=""
+          className="cta__img cta__img--1"
+        />
+        <img
+          src="/tours/tour-5-1.jpg"
+          alt=""
+          className="cta__img cta__img--2"
+        />
 
         <div className="cta__content">
           <h2 className="heading-secondary">What are you waiting for?</h2>

@@ -1,6 +1,8 @@
 // export const url = 'https://tour-manager-chi.vercel.app/api';
 export const url = 'http://localhost:3000/api';
 
+// http://http//localhost:5137/?tours=5c88fa8cf4afda39709c2955&user=66523dba9f51e17a7675a87e&price=197
+
 export async function getTours() {
   const res = await fetch(`${url}/tours`);
 
@@ -12,7 +14,6 @@ export async function getTours() {
   if (!json.data) {
     throw Error('Response JSON is missing the data property');
   }
-  console.log(json.data.doc);
   return json.data.doc;
 }
 
@@ -100,7 +101,6 @@ export async function saveSettings(data) {
   // console.log(json);
 }
 export async function changePassword(data) {
-  console.log(data);
   const token = localStorage.getItem('token');
   const res = await fetch(`${url}/users/updateMyPassword`, {
     method: 'POST',
@@ -122,27 +122,28 @@ export async function changePassword(data) {
 }
 
 export async function payment(id, stripe) {
+  console.log(id, stripe);
   const token = localStorage.getItem('token');
-  const response = await fetch(`${url}/booking/checkout-session/${id}`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-  });
+  try {
+    const response = await fetch(`${url}/booking/checkout-session/${id}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
 
-  if (!response.ok) {
-    throw new Error('Could not find the tour');
-  }
+    const data = await response.json();
+    const sessionId = data.session.id;
 
-  const data = await response.json();
-  const sessionId = data.session.id;
+    const result = await stripe.redirectToCheckout({
+      sessionId: sessionId,
+    });
 
-  const result = await stripe.redirectToCheckout({
-    sessionId: sessionId,
-  });
-
-  if (result.error) {
-    console.error('Error redirecting to checkout:', result.error.message);
+    if (result.error) {
+      console.error('Error redirecting to checkout:', result.error.message);
+    }
+  } catch (err) {
+    console.error('Error fetching checkout session:', err);
   }
 }
