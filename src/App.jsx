@@ -15,6 +15,10 @@ import UserAccount, {
 import { dispatcherAction } from './components/UserAccount/userAccountAction';
 import CartMain from './components/cart/CartMain';
 
+import BookingHome, {
+  loader as bookedTourLoader,
+} from './components/Booking/BookingHome';
+
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
@@ -70,6 +74,11 @@ const router = createBrowserRouter([
           if (authResult) return authResult;
           return userLoader(args);
         },
+      },
+      {
+        path: '/bookings',
+        element: <BookingHome />,
+        loader: bookedTourLoader,
       },
     ],
   },

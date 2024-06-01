@@ -12,7 +12,7 @@ function TourCta({ tour }) {
     );
 
     try {
-      console.log(tour.id);
+      console.log('Tour ID:', tour.id);
       await payment(tour.id, stripe);
     } catch (error) {
       console.error('Payment error:', error);

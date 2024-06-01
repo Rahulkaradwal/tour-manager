@@ -20,7 +20,7 @@ function Header() {
       </div>
       {name ? (
         <nav className="nav nav--user">
-          <Link to="#" className="nav__el">
+          <Link to="/bookings" className="nav__el">
             My bookings
           </Link>
           <Link to="/account" className="nav__el">
