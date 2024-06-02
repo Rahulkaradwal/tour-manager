@@ -1703,3 +1703,12 @@ html {
     opacity: 0.8;
   }
 }
+
+.notFound {
+  height: 65vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15rem;
+  font-size: 2rem;
+}

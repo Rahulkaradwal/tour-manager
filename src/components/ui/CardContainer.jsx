@@ -6,11 +6,13 @@ import { useSelector } from 'react-redux';
 // import { loadTour } from '../../store/tourSlice';
 import { useEffect } from 'react';
 import { getTokenDuration } from '../../utils/getToken';
+import NotFound from './NotFound';
 
 function CardContainer() {
   const navigate = useNavigation();
 
   const { tours } = useSelector((state) => state.tour);
+  console.log(tours);
 
   const token = useLoaderData();
   const submit = useSubmit();
@@ -33,6 +35,8 @@ function CardContainer() {
     <div className="overview">
       {navigate.state === 'loading' ? (
         <Loader />
+      ) : tours.length < 1 ? (
+        <NotFound />
       ) : (
         <div className="card-container">
           {tours.map((tour) => (

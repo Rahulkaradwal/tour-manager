@@ -14,6 +14,7 @@ import UserAccount, {
 } from './components/UserAccount/UserAccount';
 import { dispatcherAction } from './components/UserAccount/userAccountAction';
 import CartMain from './components/cart/CartMain';
+import NotFound from './components/ui/NotFound';
 
 import BookingHome, {
   loader as bookedTourLoader,
@@ -84,6 +85,7 @@ const router = createBrowserRouter([
           return bookedTourLoader(args);
         },
       },
+      { path: '/not-found', element: <NotFound /> },
     ],
   },
 ]);
