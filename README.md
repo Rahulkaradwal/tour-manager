@@ -93,3 +93,9 @@ To configure your Vercel deployment, you can add a `vercel.json` file:
 ### Conclusion
 
 This project demonstrates the integration of modern web development technologies to create a secure, user-friendly, and feature-rich web application. By leveraging React.js, React Router v6, JWT, and Stripe, this application offers a robust solution for managing user authentication, routing, and payment processing. Deploying the project on Vercel ensures a seamless and efficient deployment process, allowing for easy scalability and management.
+
+
+
+### Note
+
+- The CSS styles and HTML pages were originally created by Jonas Schmedtmann. These were adapted and converted into React components, then integrated into my project to form the UI, ensuring a polished and professional design.
