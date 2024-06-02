@@ -5,6 +5,7 @@ import Card from '../ui/Card';
 
 function BookingHome() {
   const data = useLoaderData();
+  console.log(data);
   const navigate = useNavigation();
 
   return (

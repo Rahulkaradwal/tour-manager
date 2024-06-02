@@ -53,7 +53,7 @@ const router = createBrowserRouter([
         errorElement: <Error />,
 
         loader: async (args) => {
-          const authResult = await checkAuthLoader(args);
+          const authResult = checkAuthLoader(args);
           if (authResult) return authResult;
 
           return getTour(args);
@@ -70,7 +70,7 @@ const router = createBrowserRouter([
         action: dispatcherAction,
 
         loader: async (args) => {
-          const authResult = await checkAuthLoader(args);
+          const authResult = checkAuthLoader(args);
           if (authResult) return authResult;
           return userLoader(args);
         },
@@ -78,7 +78,11 @@ const router = createBrowserRouter([
       {
         path: '/bookings',
         element: <BookingHome />,
-        loader: bookedTourLoader,
+        loader: async (args) => {
+          const authResult = checkAuthLoader(args);
+          if (authResult) return authResult;
+          return bookedTourLoader(args);
+        },
       },
     ],
   },
